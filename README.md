@@ -1,19 +1,19 @@
 # TSR endpoints in R
 
-Calculate patient-level `RC\_H`, `RC\_L`, and `RC\_S` using imputation strategy `"a"` or `"b"`.
+Calculate patient-level `RC_H`, `RC_L`, and `RC_S` using imputation strategy `"a"` or `"b"`.
 
 ## Files
 
-* `tsr\_endpoints.R` — endpoint calculation function.
-* `toy\_tumor\_measurements.csv` — example patient-level tumor measurements.
-* `example\_usage.R` — runnable example with results for strategies a and b.
+* `tsr_endpoints.R` — endpoint calculation function.
+* `toy_tumor_measurements.csv` — example patient-level tumor measurements.
+* `example_usage.R` — runnable example with results for strategies a and b.
 
 ## Run the example
 
 Download the files into the same folder, set that folder as your R working directory, and run:
 
 ```r
-source("example\_usage.R")
+source("example_usage.R")
 ```
 
 The example prints the first six patients' endpoint values for each strategy.
@@ -33,12 +33,12 @@ Provide one row per tumor assessment with these columns:
 Each patient must have one baseline row with a positive `SLD`. Set `DROPF` and `NEWLF` consistently across that patient's rows. The function uses the assessment rows you provide.
 
 ```r
-source("tsr\_endpoints.R")
-my\_data <- read.csv("my\_tumor\_data.csv")
+source("tsr_endpoints.R")
+my_data <- read.csv("my_tumor_data.csv")
 
-result <- calculate\_tsr\_endpoints(
-  data = my\_data,
-  endpoints = c("RC\_H", "RC\_L"),  # any of RC\_H, RC\_L, RC\_S
+result <- calculate_tsr_endpoints(
+  data = my_data,
+  endpoints = c("RC_H", "RC_L"),  # any of RC_H, RC_L, RC_S
   imputation = "a"               # "a" or "b"
 )
 print(result)
