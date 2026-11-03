@@ -1,7 +1,7 @@
-# Example: calculate TSR endpoints from the accompanying toy dataset.
+# Example: calculate TSR endpoints from the accompanying example dataset.
 
 source("tsr_endpoints.R")
-tumor_data <- read.csv("toy_tumor_measurements.csv")
+tumor_data <- read.csv("example_tumor_measurements.csv")
 
 # Calculate all three endpoints using imputation strategy a.
 results_a <- calculate_tsr_endpoints(
