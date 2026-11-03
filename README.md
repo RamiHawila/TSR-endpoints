@@ -1,11 +1,11 @@
-# TSR endpoints in R
+# Tumor size ratio (TSR) endpoints in R
 
 Calculate patient-level `RC_H`, `RC_L`, and `RC_S` using imputation strategy `"a"` or `"b"`.
 
 ## Files
 
 * `tsr_endpoints.R` — endpoint calculation function.
-* `toy_tumor_measurements.csv` — example patient-level tumor measurements.
+* `example_tumor_measurements.csv` — example patient-level tumor measurements.
 * `example_usage.R` — runnable example with results for strategies a and b.
 
 ## Run the example
@@ -22,13 +22,14 @@ The example prints the first six patients' endpoint values for each strategy.
 
 Provide one row per tumor assessment with these columns:
 
-|Column|Description|
-|-|-|
-|`ID`|Patient identifier|
-|`WEEK`|Assessment time; baseline at 0|
-|`SLD`|Tumor-size measurement (sum of longest diameters)|
-|`DROPF`|1 for early dropout; otherwise 0|
-|`NEWLF`|1 if a new lesion developed; otherwise 0|
+| Variable | Description |
+|---|---|
+| `ID` | Unique patient identifier |
+| `WEEK` | Week of tumor scan/assessment (= 0 for baseline) |
+| `SLD` | Sum of longest diameters of target lesions |
+| `DROPF` | 1 if a patient is an early dropout (without any post-baseline scans); 0 otherwise |
+| `NEWLF` | 1 if a patient develops a new lesion at any post-baseline scan; 0 otherwise |
+  
 
 Each patient must have one baseline row with a positive `SLD`. Set `DROPF` and `NEWLF` consistently across that patient's rows. The function uses the assessment rows you provide.
 
@@ -44,7 +45,7 @@ result <- calculate_tsr_endpoints(
 print(result)
 ```
 
-Strategy **a** imputes −1 for new-lesion patients; strategy **b** imputes the minimum observed relative change. Early dropouts receive −1 under both strategies.
+Strategy "a" imputes the endpoint value for patients developing new lesions at any follow-up scan by −1; strategy "b" imputes the endpoint value by the minimum observed relative change. Endpoint values of early dropouts (patients without post-baseline scans) are imputed by −1 under both strategies.
 
 Reference: [Chakraborty et al. (2025)](https://doi.org/10.1007/s10928-024-09946-3).
 
